@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Doctor dashboard')}"></head>
+<body data-page="doctor-dashboard" data-protected="true">
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+<main id="main" class="container py-4">
+    <h1 class="page-title h2 mb-4" id="welcome">Doctor dashboard</h1>
+    <div class="row g-3 mb-4">
+        <div class="col-4"><div class="card stat-card"><div class="card-body text-center"><div class="stat-value" id="statToday">-</div><div class="text-muted small">Today</div></div></div></div>
+        <div class="col-4"><div class="card stat-card"><div class="card-body text-center"><div class="stat-value" id="statUpcoming">-</div><div class="text-muted small">Upcoming</div></div></div></div>
+        <div class="col-4"><div class="card stat-card"><div class="card-body text-center"><div class="stat-value" id="statTotal">-</div><div class="text-muted small">All appointments</div></div></div></div>
+    </div>
+    <div class="row g-4">
+        <div class="col-lg-7">
+            <div class="card h-100"><div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h2 class="h5 mb-0">Next appointments</h2>
+                    <a class="btn btn-sm btn-clinic" th:href="@{/doctor/appointments}">View all</a>
+                </div>
+                <div id="nextList"></div>
+            </div></div>
+        </div>
+        <div class="col-lg-5">
+            <div class="card h-100"><div class="card-body">
+                <h2 class="h5">My profile</h2>
+                <dl class="row small" id="profileInfo"></dl>
+                <div id="formAlert" class="alert d-none" role="alert"></div>
+                <form id="profileForm" novalidate>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input class="form-control" id="name" name="name" maxlength="100" required>
+                        <div class="invalid-feedback">Name is required.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Phone</label>
+                        <input class="form-control" id="phone" name="phone" maxlength="20" pattern="[0-9+\-() ]{7,20}">
+                        <div class="invalid-feedback">Use 7-20 digits or + - ( ).</div>
+                    </div>
+                    <button type="submit" class="btn btn-clinic">Update profile</button>
+                </form>
+            </div></div>
+        </div>
+    </div>
+</main>
+<th:block th:replace="~{fragments/layout :: scripts}"></th:block>
+<script th:src="@{/js/doctor.js}"></script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Patient registration')}"></head>
+<body data-page="register" class="theme-patient">
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+<main id="main" class="container py-5">
+    <div class="card login-card" style="max-width: 560px;">
+        <div class="card-body p-4">
+            <span class="badge role-badge mb-3">Patient</span>
+            <h1 class="h3 mb-3">Create your patient account</h1>
+            <div id="formAlert" class="alert d-none" role="alert"></div>
+            <form id="registerForm" novalidate>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Full name *</label>
+                    <input class="form-control" id="name" name="name" maxlength="100" autocomplete="name" required>
+                    <div class="invalid-feedback">Name is required.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email *</label>
+                    <input type="email" class="form-control" id="email" name="email" maxlength="150" autocomplete="email" required>
+                    <div class="invalid-feedback">Enter a valid email address.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password * (8-72 characters)</label>
+                    <input type="password" class="form-control" id="password" name="password" minlength="8" maxlength="72" autocomplete="new-password" required>
+                    <div class="invalid-feedback">Password must be at least 8 characters.</div>
+                </div>
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <label for="phone" class="form-label">Phone</label>
+                        <input class="form-control" id="phone" name="phone" maxlength="20" pattern="[0-9+\-() ]{7,20}" autocomplete="tel">
+                        <div class="invalid-feedback">Use 7-20 digits or + - ( ).</div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="dateOfBirth" class="form-label">Date of birth</label>
+                        <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" autocomplete="bday">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="address" class="form-label">Address</label>
+                    <input class="form-control" id="address" name="address" maxlength="255" autocomplete="street-address">
+                </div>
+                <button type="submit" class="btn btn-accent w-100">Register</button>
+            </form>
+            <p class="mt-3 mb-0 small text-center">Already registered? <a th:href="@{/patient/login}">Sign in</a></p>
+        </div>
+    </div>
+</main>
+<th:block th:replace="~{fragments/layout :: scripts}"></th:block>
+<script th:src="@{/js/auth.js}"></script>
+</body>
+</html>

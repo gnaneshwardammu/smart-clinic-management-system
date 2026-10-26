@@ -1,0 +1,32 @@
+:root {
+  --clinic-primary: #0b6e8a;
+  --clinic-primary-dark: #08566d;
+  --clinic-bg: #f4f8fa;
+  --clinic-text: #1c2b33;
+}
+body { background: var(--clinic-bg); color: var(--clinic-text); font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+.bg-clinic { background-color: var(--clinic-primary); }
+.btn-clinic { background-color: var(--clinic-primary); border-color: var(--clinic-primary); color: #fff; }
+.btn-clinic:hover, .btn-clinic:focus { background-color: var(--clinic-primary-dark); border-color: var(--clinic-primary-dark); color: #fff; }
+.skip-link { position: absolute; left: -999px; top: 0; background: #fff; padding: .5rem 1rem; z-index: 2000; }
+.skip-link:focus { left: 0; }
+.card { border: 0; box-shadow: 0 1px 4px rgba(0, 0, 0, .08); border-radius: .75rem; }
+.stat-card .stat-value { font-size: 2rem; font-weight: 700; color: var(--clinic-primary); }
+.table-responsive { border-radius: .75rem; }
+.empty-state { text-align: center; color: #5b6b73; padding: 2rem 1rem; }
+.page-title { font-weight: 700; }
+.nav-link.active { font-weight: 600; text-decoration: underline; text-underline-offset: 6px; }
+
+/* Login pages: one accent colour per role so they are easy to tell apart */
+.login-wrap { min-height: 80vh; display: flex; align-items: center; }
+.login-card { max-width: 440px; width: 100%; margin: 0 auto; border-top: 6px solid var(--accent); }
+.login-card .role-badge { background: var(--accent); color: #fff; }
+.theme-admin   { --accent: #6f42c1; }
+.theme-doctor  { --accent: #198754; }
+.theme-patient { --accent: #0b6e8a; }
+.role-card { border-top: 6px solid var(--accent); height: 100%; }
+.btn-accent { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn-accent:hover, .btn-accent:focus { filter: brightness(.9); color: #fff; }
+.doctor-avatar { width: 48px; height: 48px; border-radius: 50%; background: #d8edf3; color: var(--clinic-primary-dark); display: flex; align-items: center; justify-content: center; font-weight: 700; }
+.slot-btn { min-width: 84px; }
+#toastArea { z-index: 3000; }

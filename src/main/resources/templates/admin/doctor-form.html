@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Doctor form')}"></head>
+<body data-page="admin-doctor-form" data-protected="true" th:attr="data-doctor-id=${doctorId}">
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+<main id="main" class="container py-4" style="max-width: 760px;">
+    <h1 class="page-title h2 mb-3" id="formTitle">Add doctor</h1>
+    <div id="formAlert" class="alert d-none" role="alert"></div>
+    <form id="doctorForm" novalidate class="card card-body">
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label for="name" class="form-label">Name *</label>
+                <input class="form-control" id="name" name="name" maxlength="100" required>
+                <div class="invalid-feedback">Name is required.</div>
+            </div>
+            <div class="col-md-6">
+                <label for="specialty" class="form-label">Specialty *</label>
+                <input class="form-control" id="specialty" name="specialty" maxlength="100" required>
+                <div class="invalid-feedback">Specialty is required.</div>
+            </div>
+            <div class="col-md-6">
+                <label for="email" class="form-label">Email *</label>
+                <input type="email" class="form-control" id="email" name="email" maxlength="150" required>
+                <div class="invalid-feedback">Enter a valid email address.</div>
+            </div>
+            <div class="col-md-6">
+                <label for="password" class="form-label">Password *</label>
+                <input type="password" class="form-control" id="password" name="password" minlength="8" maxlength="72" autocomplete="new-password" required>
+                <div class="form-text" id="passwordHelp">At least 8 characters.</div>
+                <div class="invalid-feedback">Password must be at least 8 characters.</div>
+            </div>
+            <div class="col-md-4">
+                <label for="phone" class="form-label">Phone</label>
+                <input class="form-control" id="phone" name="phone" maxlength="20" pattern="[0-9+\-() ]{7,20}">
+                <div class="invalid-feedback">Use 7-20 digits or + - ( ).</div>
+            </div>
+            <div class="col-md-4">
+                <label for="availableFrom" class="form-label">Available from *</label>
+                <input type="time" class="form-control" id="availableFrom" name="availableFrom" value="09:00" required>
+            </div>
+            <div class="col-md-4">
+                <label for="availableTo" class="form-label">Available to *</label>
+                <input type="time" class="form-control" id="availableTo" name="availableTo" value="17:00" required>
+            </div>
+            <div class="col-12">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="active" name="active" checked>
+                    <label class="form-check-label" for="active">Active (can be booked by patients)</label>
+                </div>
+            </div>
+        </div>
+        <div class="mt-4 d-flex gap-2">
+            <button type="submit" class="btn btn-clinic">Save doctor</button>
+            <a class="btn btn-outline-secondary" th:href="@{/admin/doctors}">Cancel</a>
+        </div>
+    </form>
+</main>
+<th:block th:replace="~{fragments/layout :: scripts}"></th:block>
+<script th:src="@{/js/admin.js}"></script>
+</body>
+</html>

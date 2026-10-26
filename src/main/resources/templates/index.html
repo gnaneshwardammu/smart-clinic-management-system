@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Welcome')}"></head>
+<body data-page="index">
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+<main id="main" class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="page-title display-5">Smart Clinic Management System</h1>
+        <p class="lead text-muted">Choose how you want to sign in.</p>
+    </div>
+    <div class="row g-4 justify-content-center">
+        <div class="col-md-4">
+            <div class="card role-card theme-patient"><div class="card-body text-center p-4">
+                <h2 class="h4">Patient</h2>
+                <p class="text-muted">Find doctors, book appointments and view prescriptions.</p>
+                <a class="btn btn-accent w-100 mb-2" th:href="@{/patient/login}">Patient login</a>
+                <a class="btn btn-outline-secondary w-100" th:href="@{/register}">Create an account</a>
+            </div></div>
+        </div>
+        <div class="col-md-4">
+            <div class="card role-card theme-doctor"><div class="card-body text-center p-4">
+                <h2 class="h4">Doctor</h2>
+                <p class="text-muted">See your schedule, patient details and write prescriptions.</p>
+                <a class="btn btn-accent w-100" th:href="@{/doctor/login}">Doctor login</a>
+            </div></div>
+        </div>
+        <div class="col-md-4">
+            <div class="card role-card theme-admin"><div class="card-body text-center p-4">
+                <h2 class="h4">Administrator</h2>
+                <p class="text-muted">Manage doctors, patients and clinic appointments.</p>
+                <a class="btn btn-accent w-100" th:href="@{/admin/login}">Admin login</a>
+            </div></div>
+        </div>
+    </div>
+</main>
+<th:block th:replace="~{fragments/layout :: scripts}"></th:block>
+</body>
+</html>

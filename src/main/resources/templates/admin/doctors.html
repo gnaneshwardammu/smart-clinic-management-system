@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Manage doctors')}"></head>
+<body data-page="admin-doctors" data-protected="true">
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+<main id="main" class="container py-4">
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+        <h1 class="page-title h2 mb-0">Doctors</h1>
+        <a class="btn btn-clinic" th:href="@{/admin/doctors/new}">Add doctor</a>
+    </div>
+    <div class="mb-3">
+        <label for="doctorFilter" class="form-label">Search by name or specialty</label>
+        <input type="search" id="doctorFilter" class="form-control" placeholder="e.g. Cardiology or Verma">
+    </div>
+    <div id="doctorList"></div>
+</main>
+<th:block th:replace="~{fragments/layout :: scripts}"></th:block>
+<script th:src="@{/js/admin.js}"></script>
+</body>
+</html>
