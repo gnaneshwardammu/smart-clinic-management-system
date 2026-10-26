@@ -1,0 +1,61 @@
+# Local development stack: Spring Boot app + MySQL + MongoDB.
+# 1) copy .env.example to .env and fill in the two secrets
+# 2) docker compose up --build
+# Host ports MySQL 3307 and MongoDB 27018 are used so they do not clash with databases already
+# installed on your PC. Stop a locally running "mvn spring-boot:run" first (both want port 8081).
+services:
+  mysql:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: capstone
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Set MYSQL_ROOT_PASSWORD in the .env file}
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+      # These scripts run ONLY the first time the volume is created (alphabetical order).
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - ./database/sample-data.sql:/docker-entrypoint-initdb.d/02-sample-data.sql:ro
+      - ./database/stored-procedures.sql:/docker-entrypoint-initdb.d/03-stored-procedures.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -uroot -p$$MYSQL_ROOT_PASSWORD --silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 30s
+
+  mongo:
+    image: mongo:7
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongo-data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      mysql:
+        condition: service_healthy
+      mongo:
+        condition: service_healthy
+    environment:
+      SERVER_PORT: "8081"
+      DB_URL: jdbc:mysql://mysql:3306/capstone?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      DB_USERNAME: root
+      DB_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MONGODB_URI: mongodb://mongo:27017/clinic_prescriptions
+      JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET (32+ characters) in the .env file}
+    ports:
+      - "8081:8081"
+
+volumes:
+  mysql-data:
+  mongo-data:

@@ -31,3 +31,14 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Environment secrets
+.env
+.env.*
+!.env.example
+
+# Java build outputs
+**/target/
+
+# Local configuration
+application-local.properties

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('My appointments')}"></head>
+<body data-page="doctor-appointments" data-protected="true">
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+<main id="main" class="container py-4">
+    <div class="d-flex flex-wrap justify-content-between align-items-end gap-2 mb-3">
+        <h1 class="page-title h2 mb-0">My appointments</h1>
+        <div>
+            <label for="statusFilter" class="form-label small mb-1">Filter by status</label>
+            <select id="statusFilter" class="form-select form-select-sm">
+                <option value="">All</option>
+                <option value="SCHEDULED">Scheduled</option>
+                <option value="COMPLETED">Completed</option>
+                <option value="CANCELLED">Cancelled</option>
+                <option value="NO_SHOW">No-show</option>
+            </select>
+        </div>
+    </div>
+    <div id="appointmentList"></div>
+</main>
+<th:block th:replace="~{fragments/layout :: scripts}"></th:block>
+<script th:src="@{/js/doctor.js}"></script>
+</body>
+</html>

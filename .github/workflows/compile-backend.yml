@@ -1,0 +1,28 @@
+name: Compile and test backend
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v4
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+          cache-dependency-path: app/pom.xml
+
+      # Compiles, runs all tests (they use an in-memory H2 database, no MySQL/MongoDB needed)
+      # and packages the JAR. The job fails if compilation or any test fails.
+      - name: Build and test
+        run: mvn -B clean verify
